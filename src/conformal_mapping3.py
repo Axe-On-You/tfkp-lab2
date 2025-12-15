@@ -156,7 +156,7 @@ frames = np.concatenate([np.zeros(10), np.linspace(0, 1, 80), np.ones(20)])
 try:
     # Сохранение с высокой частотой кадров для плавности
     ani = FuncAnimation(fig, update, frames=frames, interval=40, blit=True)
-    ani.save(os.path.join(gif_dir, "conformal_animation2.gif"), writer=PillowWriter(fps=25))
+    ani.save(os.path.join(gif_dir, "conformal_animation3.gif"), writer=PillowWriter(fps=25))
     print("Анимация 'output/gif/conformal_animation3.gif' сохранена.")
 except Exception as e:
     print(f"Не удалось сохранить GIF. Убедитесь, что установлены numpy, matplotlib, Pillow: {e}")
