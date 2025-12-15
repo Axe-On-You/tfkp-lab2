@@ -3,9 +3,15 @@ import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation, PillowWriter
 import os
 
+project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+
+# Пути для сохранения
+img_dir = os.path.join(project_root, "output", "img")
+gif_dir = os.path.join(project_root, "output", "gif")
+
 # Создание папок для сохранения, если они не существуют
-os.makedirs("output/img", exist_ok=True)
-os.makedirs("output/gif", exist_ok=True)
+os.makedirs(img_dir, exist_ok=True)
+os.makedirs(gif_dir, exist_ok=True)
 
 
 # === 1. ГЕНЕРАЦИЯ ТОЧЕК (Сектор) ===
@@ -83,7 +89,7 @@ def save_static_report_image():
     ax[1].set_aspect('equal')
 
     plt.tight_layout()
-    plt.savefig("output/img/static_mapping1.png", dpi=200)
+    plt.savefig(os.path.join(img_dir, "static_mapping1.png"), dpi=200)
     print("Картинка 'static_mapping1.png' сохранена.")
     plt.close()
 
@@ -130,7 +136,7 @@ frames = np.concatenate([np.zeros(10), np.linspace(0, 1, 80), np.ones(20)])
 ani = FuncAnimation(fig, update, frames=frames, interval=40, blit=True)
 
 try:
-    ani.save("output/gif/conformal_animation1.gif", writer=PillowWriter(fps=25))
+    ani.save(os.path.join(gif_dir, "conformal_animation1.gif"), writer=PillowWriter(fps=25))
     print("Анимация 'conformal_animation1.gif' сохранена.")
 except Exception as e:
     print(f"Не удалось сохранить GIF: {e}")

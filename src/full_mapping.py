@@ -3,9 +3,15 @@ import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation, PillowWriter
 import os
 
-# Создание папок для сохранения
-os.makedirs("output/img", exist_ok=True)
-os.makedirs("output/gif", exist_ok=True)
+project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+
+# Пути для сохранения
+img_dir = os.path.join(project_root, "output", "img")
+gif_dir = os.path.join(project_root, "output", "gif")
+
+# Создание папок для сохранения, если они не существуют
+os.makedirs(img_dir, exist_ok=True)
+os.makedirs(gif_dir, exist_ok=True)
 
 
 # =========================================================================
@@ -108,7 +114,7 @@ def save_full_static_image():
             ax[i].add_patch(plt.Circle((0, 0), np.pi, color='red', fill=False, linestyle='--'))
 
     plt.tight_layout()
-    plt.savefig(os.path.join("output/img", "full_mapping.png"), dpi=200)
+    plt.savefig(os.path.join(img_dir, "full_mapping.png"), dpi=200)
     print("Статическое изображение 'output/img/full_mapping.png' сохранено.")
     plt.close()
 
@@ -198,7 +204,7 @@ frames = np.arange(100)
 
 try:
     ani = FuncAnimation(fig, update, frames=frames, interval=60, blit=True)
-    ani.save("output/gif/conformal_animation_full.gif", writer=PillowWriter(fps=15))
+    ani.save(os.path.join(gif_dir, "conformal_animation_full.gif"), writer=PillowWriter(fps=15))
     print("Анимация 'output/gif/conformal_animation_full.gif' сохранена.")
 except Exception as e:
     print(f"Не удалось сохранить GIF. Убедитесь, что установлены numpy, matplotlib, Pillow: {e}")
