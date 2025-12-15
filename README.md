@@ -6,8 +6,8 @@
 
 $$
 \begin{aligned}
-D &\xrightarrow{; z_1 = -i z^2 ;} H \
-&\xrightarrow{; z_2 = \dfrac{z_1 - i}{z_1 + i} ;} K \
+D &\xrightarrow{; z_1 = -i z^2 ;} H \\
+&\xrightarrow{; z_2 = \dfrac{z_1 - i}{z_1 + i} ;} K \\
 &\xrightarrow{; w = \pi z_2 ;} G
 \end{aligned}
 $$
