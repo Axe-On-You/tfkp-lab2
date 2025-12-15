@@ -1,0 +1,709 @@
+\documentclass[a4paper,12pt]{article}
+
+% --- Подключение пакетов ---
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts} % Мат. символы
+
+\usepackage{graphicx} % Для вставки картинок
+\usepackage{geometry} % Поля страницы
+\usepackage{listings} % Для вставки кода
+\usepackage{xcolor}   % Цвета для кода
+\usepackage{hyperref} % Гиперссылки
+\usepackage{float}    % Плавающие объекты
+
+% --- Настройка полей ---
+\geometry{left=2cm, right=1.5cm, top=2cm, bottom=2cm}
+
+% --- Авторская ебанина для адекватной вставки кода с использованием кириллицы ---
+\usepackage{listings}
+\lstdefinestyle{mypython}{
+    language=Python,
+    basicstyle=\ttfamily\scriptsize,
+    keywordstyle=\color{blue}\bfseries,
+    stringstyle=\color{red},
+    commentstyle=\color{green!60!black},
+    numbers=left,
+    numberstyle=\tiny\color{gray},
+    stepnumber=1,
+    numbersep=8pt,
+    showspaces=false,
+    showstringspaces=false,
+    tabsize=4,
+    frame=single,
+    rulecolor=\color{black},
+    breaklines=true,
+    breakatwhitespace=false,
+    captionpos=b,
+    xleftmargin=15pt,
+    xrightmargin=5pt,
+    framexleftmargin=12pt,
+    backgroundcolor=\color{gray!5},
+    literate=%
+        {а}{{\cyra}}1 {б}{{\cyrb}}1 {в}{{\cyrv}}1 {г}{{\cyrg}}1 {д}{{\cyrd}}1
+        {е}{{\cyre}}1 {ё}{{\cyrie}}1 {ж}{{\cyrzh}}1 {з}{{\cyrz}}1 {и}{{\cyri}}1
+        {й}{{\cyrishrt}}1 {к}{{\cyrk}}1 {л}{{\cyrl}}1 {м}{{\cyrm}}1 {н}{{\cyrn}}1
+        {о}{{\cyro}}1 {п}{{\cyrp}}1 {р}{{\cyrr}}1 {с}{{\cyrs}}1 {т}{{\cyrt}}1
+        {у}{{\cyru}}1 {ф}{{\cyrf}}1 {х}{{\cyrh}}1 {ц}{{\cyrc}}1 {ч}{{\cyrch}}1
+        {ш}{{\cyrsh}}1 {щ}{{\cyrshch}}1 {ъ}{{\cyrhrdsn}}1 {ы}{{\cyrery}}1
+        {ь}{{\cyrsftsn}}1 {э}{{\cyrerev}}1 {ю}{{\cyryu}}1 {я}{{\cyrya}}1
+        {А}{{\CYRA}}1 {Б}{{\CYRB}}1 {В}{{\CYRV}}1 {Г}{{\CYRG}}1 {Д}{{\CYRD}}1
+        {Е}{{\CYRE}}1 {Ё}{{\CYRIE}}1 {Ж}{{\CYRZH}}1 {З}{{\CYRZ}}1 {И}{{\CYRI}}1
+        {Й}{{\CYRISHRT}}1 {К}{{\CYRK}}1 {Л}{{\CYRL}}1 {М}{{\CYRM}}1 {Н}{{\CYRN}}1
+        {О}{{\CYRO}}1 {П}{{\CYRP}}1 {Р}{{\CYRR}}1 {С}{{\CYRS}}1 {Т}{{\CYRT}}1
+        {У}{{\CYRU}}1 {Ф}{{\CYRF}}1 {Х}{{\CYRH}}1 {Ц}{{\CYRC}}1 {Ч}{{\CYRCH}}1
+        {Ш}{{\CYRSH}}1 {Щ}{{\CYRSHCH}}1 {Ъ}{{\CYRHRDSN}}1 {Ы}{{\CYRERY}}1
+        {Ь}{{\CYRSFTSN}}1 {Э}{{\CYREREV}}1 {Ю}{{\CYRYU}}1 {Я}{{\CYRYA}}1
+}
+\lstset{style=mypython}
+
+\begin{document}
+
+% ===========================================================================
+% 1. TITLE PAGE / ТИТУЛЬНЫЙ ЛИСТ
+% ===========================================================================
+\begin{titlepage}
+    \centering
+    % 1. Header block
+    {\fontsize{11}{13}\selectfont \textbf{Министерство науки и высшего образования Российской Федерации}} \\
+    {\fontsize{7}{10}\selectfont ФЕДЕРАЛЬНОЕ ГОСУДАРСТВЕННОЕ АВТОНОМНОЕ ОБРАЗОВАТЕЛЬНОЕ УЧРЕЖДЕНИЕ ВЫСШЕГО ОБРАЗОВАНИЯ} \\
+    \vspace{0.2cm} 
+    {\fontsize{14}{17}\selectfont \textbf{«НАЦИОНАЛЬНЫЙ ИССЛЕДОВАТЕЛЬСКИЙ УНИВЕРСИТЕТ ИТМО»}}
+    
+    % 2. Small vertical space
+    \vspace{1cm} 
+    
+    % Stream info
+    {\fontsize{12}{14}\selectfont \textbf{Поток ТФКП 22.4}}
+    
+    % 3. Small vertical space
+    \vspace{1cm}
+    
+    % Discipline info
+    {\fontsize{12}{14}\selectfont \textbf{Дисциплина: Теория функций комплексного переменного (ТФКП)}}
+    
+    % 4. Centered Title (using vfill to center vertically relative to the page content space)
+    \vspace*{\fill}
+    
+    {\fontsize{18}{22}\selectfont \textbf{ЛАБОРАТОРНАЯ РАБОТА}} \\
+    \vspace{0.5cm}
+    {\fontsize{14}{17}\selectfont \textbf{по теме: «Построение конформных отображений»}}
+    
+    % 5. Larger vertical space
+    \vspace{2cm}
+    
+    {\fontsize{12}{14}\selectfont \textbf{Вариант 20}
+    
+    % 6. Arbitrary space and Right-aligned block
+    \vspace{2cm}
+    
+    \begin{flushright}
+        \fontsize{12}{14}\selectfont
+        Выполнили: \\
+        Михайлов Петр Сергеевич \\
+        Соболев Егор Викторович \\
+        \vspace{1em}
+        Преподаватель: \\
+        Поздняков Семен Сергеевич
+    \end{flushright}
+    
+    % Push the footer to the very bottom
+    \vfill
+    
+    % 7. Footer
+    {\fontsize{12}{14}\selectfont
+    Санкт-Петербург, 2025 \\
+    15.12.2025
+    }
+\end{titlepage}
+
+\setcounter{page}{2}
+
+\newpage
+
+% ===========================================================================
+% 2. Table of contents / Оглавление
+% ===========================================================================
+\tableofcontents
+\newpage
+
+% ===========================================================================
+% 3. Аналитическое описание и построение композиции
+% ===========================================================================
+
+\section{Аналитическое описание множеств}
+
+\subsection{Исходное множество $D$ (Рисунок 5)}
+Исходное множество представляет собой угловой сектор на комплексной плоскости $z$, ограниченный лучами, выходящими из начала координат. Углы наклона граничных лучей к положительному направлению вещественной оси составляют $\frac{\pi}{4}$ и $\pi - \frac{\pi}{4} = \frac{3\pi}{4}$.
+
+Аналитически область $D$ описывается неравенством для аргумента комплексного числа:
+$$
+D = \left\{ z \in \mathbb{C} \mid \frac{\pi}{4} < \arg z < \frac{3\pi}{4} \right\}
+$$
+Угловая мера сектора составляет $\alpha = \frac{3\pi}{4} - \frac{\pi}{4} = \frac{\pi}{2}$.
+
+\subsection{Целевое множество $G$ (Рисунок 8)}
+Целевое множество представляет собой открытый круг на комплексной плоскости $w$ с центром в начале координат. Судя по рисунку, граница проходит через точку $\pi$ на вещественной оси, то есть радиус круга равен $\pi$.
+
+Аналитически область $G$ описывается неравенством для модуля комплексного числа:
+$$
+G = \{ w \in \mathbb{C} \mid |w| < \pi \}
+$$
+
+% ===========================================================================
+% 4. Построение конформного отображения из D в G
+% ===========================================================================
+\section{Построение конформного отображения $D \to G$}
+
+Для перевода исходной области $D$ (сектор) в целевую область $G$ (круг радиуса $\pi$) воспользуемся композицией трех элементарных конформных преобразований:
+$$
+z \stackrel{f_1}{\longrightarrow} z_1 \stackrel{f_2}{\longrightarrow} z_2 \stackrel{f_3}{\longrightarrow} w
+$$
+где:
+\begin{itemize}
+    \item $z \in D$ (Сектор);
+    \item $z_1 \in H$ (Верхняя полуплоскость);
+    \item $z_2 \in K$ (Единичный круг);
+    \item $w \in G$ (Круг радиуса $\pi$).
+\end{itemize}
+
+\subsection{Шаг 1. $D \to H$: Отображение сектора на Верхнюю полуплоскость}
+Для перевода области $D$ в полуплоскость (угол $\pi$) требуется «развернуть» сектор угловой мерой $\frac{\pi}{2}$ (согласно справочному рисунку №4). Используем преобразование $f_1(z) = z_1$.
+
+\textbf{1.1. Поворот:}
+Сначала повернем исходный сектор по часовой стрелке на угол $\frac{\pi}{4}$, чтобы одна из его сторон легла на положительную вещественную полуось.
+Преобразование поворота:
+$$ z' = z \cdot e^{-i\frac{\pi}{4}} $$
+Проверим изменение аргументов:
+$$ \frac{\pi}{4} - \frac{\pi}{4} < \arg z' < \frac{3\pi}{4} - \frac{\pi}{4} \implies 0 < \arg z' < \frac{\pi}{2} $$
+Область $D'$ теперь представляет собой первую координатную четверть.
+
+\textbf{1.2. Степенная функция:}
+Чтобы отобразить первую четверть (угол $\frac{\pi}{2}$) на верхнюю полуплоскость (угол $\pi$), нужно удвоить аргумент. Используем функцию $z_1 = (z')^2$.
+$$ z_1 = (z \cdot e^{-i\frac{\pi}{4}})^2 = z^2 \cdot e^{-i\frac{\pi}{2}} $$
+Так как $e^{-i\frac{\pi}{2}} = -i$, получаем окончательную формулу отображения:
+$$ z_1 = -i z^2 $$
+
+\textbf{1.3. Визуализация:}
+Ниже представлены графики исходного множества и результата его первого отображения. Цветовая раскраска точек сохраняется при отображении, что позволяет отследить соответствие границ.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1.0\textwidth]{static_mapping1.png}
+    \caption{Слева: Исходный сектор $D$ ($\pi/4 < \arg z < 3\pi/4$). Справа: Промежуточная область $H$ ($\text{Im } z_1 > 0$).}
+    \label{fig:mapping}
+\end{figure}
+
+\newpage
+
+\subsection*{Исходный код программы (Шаг 1)}
+\begin{lstlisting}[language=Python, caption=Python код для визуализации отображения области D на область H]
+def get_grid_points():
+    """
+    Создает сетку точек в секторе pi/4 < arg(z) < 3pi/4.
+    Используем полярную сетку для красивых линий сетки.
+    """
+    rs = np.linspace(0.1, 2.0, 15) # Радиусы от 0.1 до 2.0
+    thetas = np.linspace(np.pi / 4, 3 * np.pi / 4, 30) # Углы от pi/4 до 3pi/4
+
+    # 1. Радиальные линии (лучи)
+    lines = []
+    for t in thetas:
+        r_line = np.linspace(0, 2.0, 100)
+        lines.append(r_line * np.exp(1j * t))
+
+    # 2. Дуговые линии (окружности)
+    for r in rs:
+        t_arc = np.linspace(np.pi / 4, 3 * np.pi / 4, 100)
+        lines.append(r * np.exp(1j * t_arc))
+
+    # Преобразуем список массивов в один длинный массив для анимации
+    # Добавляем NaN разделители, чтобы линии не соединялись
+    Z_lines = []
+    for line in lines:
+        Z_lines.extend(line)
+        Z_lines.append(np.nan + 1j * np.nan)
+    return np.array(Z_lines)
+
+def mapping(z):
+    return -1j * (z ** 2) # z_1 = -i * z^2
+
+Z = get_grid_points()
+W = mapping(Z)
+
+def save_static_report_image():
+    # Генерируем плотное облако точек для красивой картинки (в отличие от линий сетки выше)
+    num_pts = 10000
+    r_rand = np.sqrt(np.random.uniform(0, 4, num_pts))  # sqrt для равномерности круга
+    t_rand = np.random.uniform(np.pi / 4, 3 * np.pi / 4, num_pts)
+    Z_cloud = r_rand * np.exp(1j * t_rand)
+    W_cloud = mapping(Z_cloud)
+
+    fig, ax = plt.subplots(1, 2, figsize=(12, 5))
+
+    colors = np.angle(Z_cloud) # Раскраска по углу (чтобы видеть, куда переходят границы)
+
+    # Левая часть: исходный рисунок (gifted power)
+    ax[0].scatter(Z_cloud.real, Z_cloud.imag, c=colors, cmap='hsv', s=1, alpha=0.5)
+    ax[0].set_title("Исходная область $D$\n($\\pi/4 < \\arg z < 3\\pi/4$)")
+    ax[0].axhline(0, color='k', lw=0.8)
+    ax[0].axvline(0, color='k', lw=0.8)
+    ax[0].grid(True, alpha=0.3)
+    ax[0].set_aspect('equal')
+
+    #  Правая часть: образ конформного отображения (pure effort)
+    ax[1].scatter(W_cloud.real, W_cloud.imag, c=colors, cmap='hsv', s=1, alpha=0.5)
+    ax[1].set_title("Результат отображения $H$\n($z_1 = -i z^2$)")
+    ax[1].axhline(0, color='k', lw=0.8)
+    ax[1].axvline(0, color='k', lw=0.8)
+    ax[1].grid(True, alpha=0.3)
+    ax[1].set_aspect('equal')
+
+    plt.tight_layout()
+    plt.savefig("output/img/static_mapping1.png", dpi=200)
+    print("Картинка 'static_mapping1.png' сохранена.")
+    plt.close()
+
+save_static_report_image()
+\end{lstlisting}
+
+\newpage
+
+\subsection{Шаг 2. $H \to K$: Отображение Верхней полуплоскости на Единичный круг}
+Требуется отобразить Верхнюю полуплоскость $H = \{ z_1 \mid \text{Im } z_1 > 0 \}$ на Единичный круг $K = \{ z_2 \mid |z_2| < 1 \}$.
+Для этого используем Дробно-линейное преобразование (Преобразование Мёбиуса), соответствующее справочному рисунку №11.
+
+\textbf{2.1. Выбор преобразования:}
+Общий вид преобразования, отображающего верхнюю полуплоскость на единичный круг:
+$$ z_2 = e^{i\alpha} \frac{z_1 - z_0}{z_1 - \overline{z_0}} $$
+где $z_0$ — любая точка в $H$ ($\text{Im } z_0 > 0$), которая отображается в центр круга ($z_2=0$), а $\alpha \in \mathbb{R}$ — поворот.
+
+Для максимальной простоты выберем:
+\begin{itemize}
+    \item $z_0 = i$ (центр, лежащий в $H$);
+    \item $\alpha = 0$ (отсутствие дополнительного поворота).
+\end{itemize}
+
+Подставляя эти значения, получаем:
+$$ z_2 = \frac{z_1 - i}{z_1 - \overline{i}} = \frac{z_1 - i}{z_1 - (-i)} $$
+$$ \mathbf{z_2 = \frac{z_1 - i}{z_1 + i}} $$
+
+\textbf{2.2. Проверка граничных точек (для наглядности):}
+Проверим, как преобразуется вещественная ось $\text{Im } z_1 = 0$ (граница $H$) в границу круга $|z_2|=1$.
+\begin{itemize}
+    \item Точка $z_1 = 0 \in \mathbb{R}$ переходит в $z_2 = \frac{0 - i}{0 + i} = -1$.
+    \item Точка $z_1 = 1 \in \mathbb{R}$ переходит в $z_2 = \frac{1 - i}{1 + i} = \frac{(1 - i)^2}{(1 + i)(1 - i)} = \frac{1 - 2i - 1}{1 + 1} = \frac{-2i}{2} = -i$.
+\end{itemize}
+Таким образом, вещественная ось отображается на окружность $|z_2|=1$.
+
+\textbf{2.3. Визуализация:}
+Ниже представлен результат второго этапа: отображение верхней полуплоскости $H$ на единичный круг $K$.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1.0\textwidth]{static_mapping2.png}
+    \caption{Слева: Промежуточная область $H$ ($\text{Im } z_1 > 0$). Справа: Результат отображения во второй промежуточный круг $K$ ($|z_2| < 1$).}
+    \label{fig:mapping2}
+\end{figure}
+
+\newpage
+
+\subsection*{Исходный код программы (Шаг 2)}
+\begin{lstlisting}[language=Python, caption=Python код для визуализации отображения области H на область K, style=mypython]
+def get_grid_points():
+    """
+    Создает сетку точек в Верхней полуплоскости H.
+    Используем прямоугольную сетку.
+    """
+    reals = np.linspace(-4, 4, 15) # Вещественные линии (вертикальные)
+    imags = np.linspace(0.1, 4, 10) # Мнимые линии (горизонтальные)
+
+    lines = []
+
+    # 1. Вертикальные линии (Re = const)
+    for r in reals:
+        im_line = np.linspace(0, 4, 100)
+        lines.append(r + 1j * im_line)
+
+    # 2. Горизонтальные линии (Im = const)
+    for i in imags:
+        re_line = np.linspace(-4, 4, 100)
+        lines.append(re_line + 1j * i)
+
+    # Преобразуем список массивов в один длинный массив для анимации
+    # Добавляем NaN разделители, чтобы линии не соединялись
+    Z_lines = []
+    for line in lines:
+        Z_lines.extend(line)
+        Z_lines.append(np.nan + 1j * np.nan)
+
+    return np.array(Z_lines)
+
+def mapping(z1):
+    return (z1 - 1j) / (z1 + 1j) # z2 = (z1 - i) / (z1 + i)
+
+Z1 = get_grid_points()
+Z2 = mapping(Z1)
+
+def save_static_report_image():
+    num_pts = 10000 # Генерируем плотное облако точек
+    Z1_real = np.random.uniform(-4, 4, num_pts)
+    Z1_imag = np.random.uniform(0.1, 4, num_pts)
+    Z1_cloud = Z1_real + 1j * Z1_imag
+    Z2_cloud = mapping(Z1_cloud)
+    fig, ax = plt.subplots(1, 2, figsize=(12, 5))
+    colors = np.angle(Z1_cloud) # Раскраска по углу (чтобы отследить конформность)
+    # Левая часть: Исходная область H
+    ax[0].scatter(Z1_cloud.real, Z1_cloud.imag, c=colors, cmap='hsv', s=1, alpha=0.5)
+    ax[0].set_title("Исходная область $H$\n($\\text{Im } z_1 > 0$)")
+    ax[0].axhline(0, color='k', lw=0.8)
+    ax[0].axvline(0, color='k', lw=0.8)
+    ax[0].set_xlim(-4.5, 4.5)
+    ax[0].set_ylim(0, 4.5)
+    ax[0].grid(True, alpha=0.3)
+    ax[0].set_aspect('equal')
+    # Правая часть: Образ конформного отображения K
+    ax[1].scatter(Z2_cloud.real, Z2_cloud.imag, c=colors, cmap='hsv', s=1, alpha=0.5)
+    ax[1].set_title("Результат отображения $K$\n($z_2 = (z_1 - i)/(z_1 + i)$, $|z_2| < 1$)")
+    ax[1].axhline(0, color='k', lw=0.8)
+    ax[1].axvline(0, color='k', lw=0.8)
+    # Добавляем границу единичного круга
+    ax[1].add_patch(plt.Circle((0, 0), 1.0, color='red', fill=False, linestyle='--'))
+    ax[1].set_xlim(-1.5, 1.5)
+    ax[1].set_ylim(-1.5, 1.5)
+    ax[1].grid(True, alpha=0.3)
+    ax[1].set_aspect('equal')
+    plt.tight_layout()
+    plt.savefig("output/img/static_mapping2.png", dpi=200)
+    print("Картинка 'output/img/static_mapping2.png' сохранена.")
+    plt.close()
+
+save_static_report_image()
+\end{lstlisting}
+
+\newpage
+
+\subsection{Шаг 3. $K \to G$: Отображение Единичного круга на круг радиуса $\pi$}
+Требуется отобразить Единичный круг $K = \{ z_2 \mid |z_2| < 1 \}$ на целевой круг $G = \{ w \mid |w| < \pi \}$. Это преобразование является Гомотетией (растяжением), соответствующим справочному рисунку №3.
+
+\textbf{3.1. Выбор преобразования:}
+Преобразование имеет вид $w = k z_2$, где $k$ — коэффициент растяжения.
+Поскольку радиус $R_K = 1$ должен перейти в радиус $R_G = \pi$, коэффициент $k$ должен быть равен $\pi$.
+$$ \mathbf{w = \pi z_2} $$
+
+\textbf{3.2. Проверка граничных точек:}
+Проверим модуль:
+$$ |w| = |\pi z_2| = \pi |z_2| $$
+Если $|z_2| < 1$, то $|w| < \pi \cdot 1 = \pi$. Целевая область достигнута.
+
+\textbf{3.3. Визуализация:}
+Ниже представлен результат третьего и последнего этапа: растяжение единичного круга $K$ в круг радиуса $\pi$ (область $G$).
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1.0\textwidth]{static_mapping3.png}
+    \caption{Слева: Промежуточная область $K$ ($|z_2| < 1$). Справа: Результат отображения в целевую область $G$ ($|w| < \pi$).}
+    \label{fig:mapping3}
+\end{figure}
+
+\newpage
+
+\subsection*{Исходный код программы (Шаг 3)}
+\begin{lstlisting}[language=Python, caption=Python код для визуализации отображения области K на область G, style=mypython]
+def get_grid_points():
+    """
+    Создает сетку точек в Единичном круге K.
+    Используем полярную сетку для красивых линий сетки.
+    """
+    rs = np.linspace(0.1, 1.0, 10)  # Радиусы от 0.1 до 1.0
+    thetas = np.linspace(0, 2 * np.pi, 30, endpoint=False)  # Углы от 0 до 2pi
+    lines = []
+    # 1. Радиальные линии (лучи)
+    for t in thetas:
+        r_line = np.linspace(0, 1.0, 100)
+        lines.append(r_line * np.exp(1j * t))
+    # 2. Дуговые линии (окружности)
+    for r in rs:
+        t_arc = np.linspace(0, 2 * np.pi, 100)
+        lines.append(r * np.exp(1j * t_arc))
+    # Преобразуем список массивов в один длинный массив для анимации
+    # Добавляем NaN разделители, чтобы линии не соединялись
+    Z_lines = []
+    for line in lines:
+        Z_lines.extend(line)
+        Z_lines.append(np.nan + 1j * np.nan)
+
+    return np.array(Z_lines)
+
+def mapping(z2):
+    return np.pi * z2 # w = pi * z2 (Гомотетия)
+
+Z2 = get_grid_points()
+W = mapping(Z2)
+
+def save_static_report_image():
+    num_pts = 10000 # Генерируем плотное облако точек
+    # Используем sqrt для равномерного распределения точек внутри круга
+    r_rand = np.sqrt(np.random.uniform(0, 1, num_pts))
+    t_rand = np.random.uniform(0, 2 * np.pi, num_pts)
+    Z2_cloud = r_rand * np.exp(1j * t_rand)
+    W_cloud = mapping(Z2_cloud)
+    fig, ax = plt.subplots(1, 2, figsize=(12, 5))
+    # Раскраска по углу
+    colors = np.angle(Z2_cloud)
+    # Левая часть: Исходная область K
+    ax[0].scatter(Z2_cloud.real, Z2_cloud.imag, c=colors, cmap='hsv', s=1, alpha=0.5)
+    ax[0].set_title("Исходная область $K$\n($|z_2| < 1$)")
+    ax[0].axhline(0, color='k', lw=0.8)
+    ax[0].axvline(0, color='k', lw=0.8)
+    ax[0].add_patch(plt.Circle((0, 0), 1.0, color='red', fill=False, linestyle='--'))
+    ax[0].set_xlim(-1.5, 1.5)
+    ax[0].set_ylim(-1.5, 1.5)
+    ax[0].grid(True, alpha=0.3)
+    ax[0].set_aspect('equal')
+
+    # Правая часть: Образ конформного отображения G
+    ax[1].scatter(W_cloud.real, W_cloud.imag, c=colors, cmap='hsv', s=1, alpha=0.5)
+    ax[1].set_title("Результат отображения $G$\n($w = \\pi z_2$, $|w| < \\pi$)")
+    ax[1].axhline(0, color='k', lw=0.8)
+    ax[1].axvline(0, color='k', lw=0.8)
+    # Добавляем границу целевого круга
+    ax[1].add_patch(plt.Circle((0, 0), np.pi, color='red', fill=False, linestyle='--'))
+    ax[1].set_xlim(-4, 4)
+    ax[1].set_ylim(-4, 4)
+    ax[1].grid(True, alpha=0.3)
+    ax[1].set_aspect('equal')
+    plt.tight_layout()
+    plt.savefig("output/img/static_mapping3.png", dpi=200)
+    print("Картинка 'output/img/static_mapping3.png' сохранена.")
+    plt.close()
+    
+save_static_report_image()
+\end{lstlisting}
+
+\newpage
+
+\section{Итоговое конформное отображение}
+
+\subsection{Прямое отображение $w = F(z)$}
+Составим композицию, последовательно подставляя преобразования:
+$$
+w = f_3(f_2(f_1(z)))
+$$
+\begin{enumerate}
+    \item Вспомним Шаг 1: $z_1 = -i z^2$
+    \item Подставим $z_1$ в Шаг 2 ($z_2$):
+    $$ z_2 = \frac{z_1 - i}{z_1 + i} = \frac{(-i z^2) - i}{(-i z^2) + i} = \frac{-i (z^2 + 1)}{-i (z^2 - 1)} = \frac{z^2 + 1}{z^2 - 1} $$
+    \item Подставим $z_2$ в Шаг 3 ($w$):
+    $$ \mathbf{w = \pi z_2 = \pi \frac{z^2 + 1}{z^2 - 1}} $$
+\end{enumerate}
+Это и есть искомая формула конформного отображения области $D$ на область $G$.
+
+\subsection{Обратное отображение $z = F^{-1}(w)$}
+Требуется составить обратное отображение $z = F^{-1}(w)$, переводящее целевое множество $G$ (круг радиуса $\pi$) обратно в исходный сектор $D$.
+
+Обратная композиция:
+$$
+w \stackrel{f_3^{-1}}{\longrightarrow} z_2 \stackrel{f_2^{-1}}{\longrightarrow} z_1 \stackrel{f_1^{-1}}{\longrightarrow} z
+$$
+
+\textbf{1. Обратный Шаг 3: $G \to K$ (Обратная гомотетия)}
+$$
+w = \pi z_2 \quad \implies \quad z_2 = \frac{1}{\pi} w
+$$
+$$
+f_3^{-1}(w) = \frac{w}{\pi}
+$$
+
+\textbf{2. Обратный Шаг 2: $K \to H$ (Обратное преобразование Мёбиуса)}
+Используем прямое преобразование $z_2 = \frac{z_1 - i}{z_1 + i}$ и выразим $z_1$ через $z_2$:
+$$
+z_2 (z_1 + i) = z_1 - i \\
+z_2 z_1 + i z_2 = z_1 - i \\
+z_2 z_1 - z_1 = -i - i z_2 \\
+z_1 (z_2 - 1) = -i (1 + z_2) \\
+z_1 = -i \frac{1 + z_2}{z_2 - 1} = i \frac{1 + z_2}{1 - z_2}
+$$
+$$
+f_2^{-1}(z_2) = i \frac{1 + z_2}{1 - z_2}
+$$
+
+\textbf{3. Обратный Шаг 1: $H \to D$ (Обратная степенная функция и поворот)}
+Используем прямое преобразование $z_1 = -i z^2$. Выразим $z$ через $z_1$:
+$$
+z^2 = \frac{z_1}{-i} = i z_1
+$$
+$$
+z = \sqrt{i z_1}
+$$
+Для выбора ветви корня необходимо учесть, что обратное отображение должно вернуть нас в исходную область $D$: $\frac{\pi}{4} < \arg z < \frac{3\pi}{4}$.
+Поскольку $\arg(\sqrt{u}) = \frac{1}{2} \arg u$, и $\arg(i z_1) = \frac{\pi}{2} + \arg z_1$, то:
+$$ \arg z = \frac{1}{2} \left( \frac{\pi}{2} + \arg z_1 \right) $$
+Так как $z_1 \in H$, $\arg z_1 \in (0, \pi)$.
+$$ \frac{1}{2} \left( \frac{\pi}{2} + 0 \right) < \arg z < \frac{1}{2} \left( \frac{\pi}{2} + \pi \right) $$
+$$ \frac{\pi}{4} < \arg z < \frac{3\pi}{4} $$
+Выбор главной ветви квадратного корня $z = \sqrt{i z_1}$ является корректным, так как он возвращает нас в требуемый сектор $D$.
+
+$$
+f_1^{-1}(z_1) = \sqrt{i z_1}
+$$
+
+\textbf{4. Окончательная формула обратного отображения:}
+Собираем композицию $z = f_1^{-1}(f_2^{-1}(f_3^{-1}(w)))$:
+
+$$
+z = \sqrt{i \cdot \left( i \frac{1 + \frac{w}{\pi}}{1 - \frac{w}{\pi}} \right)}
+$$
+Упростим выражение под корнем:
+$$
+i \cdot i \frac{1 + w/\pi}{1 - w/\pi} = -1 \cdot \frac{(\pi + w)/\pi}{(\pi - w)/\pi} = - \frac{\pi + w}{\pi - w} = \frac{\pi + w}{w - \pi}
+$$
+Итоговая формула обратного отображения:
+$$
+\mathbf{z = \sqrt{\frac{\pi + w}{w - \pi}}}
+$$
+\textbf{Обоснование выбора ветви:}
+Функция комплексного квадратного корня является двузначной. Поскольку обратное отображение $F^{-1}: G \to D$ должно быть однозначным и переводить точки из $G$ строго в исходную область $D$, необходимо выбрать конкретную ветвь корня. Для обеспечения попадания в сектор $D = \{ z \mid \pi/4 < \arg z < 3\pi/4 \}$, выбирается та ветвь $\sqrt{\cdot}$, которая соответствует непрерывному изменению аргумента $\arg z$ в требуемом диапазоне.
+
+\newpage
+
+\section{Комплексная визуализация процесса}
+
+\subsection{Результаты работы программы}
+Ниже представлен итоговый график, который объединяет все три этапа в одну наглядную схему, демонстрируя композицию преобразований $D \to H \to K \to G$.
+
+\begin{figure}[H]
+    \centering
+    % Файл full_mapping.png будет сгенерирован в следующем блоке кода
+    \includegraphics[width=1.0\textwidth]{full_mapping.png}
+    \caption{Последовательная визуализация конформного отображения $D \to G$.\\ (a) Исходный сектор $D$. (b) Промежуточная область $H$ ($z_1 = -i z^2$). (c) Промежуточная область $K$ ($z_2 = (z_1-i)/(z_1+i)$). (d) Целевой круг $G$ ($w = \pi z_2$).}
+    \label{fig:full_mapping}
+\end{figure}
+
+\newpage
+
+\section{Исходный код полной визуализации}
+
+\begin{lstlisting}[language=Python, caption=Python код для визуализации всей композиции отображения $D \to G$, style=mypython]
+def get_grid_points():
+    """
+    Создает сетку точек в исходном секторе D: pi/4 < arg(z) < 3pi/4.
+    """
+    rs = np.linspace(0.1, 2.0, 15)  # Радиусы от 0.1 до 2.0
+    thetas = np.linspace(np.pi / 4, 3 * np.pi / 4, 30)  # Углы от pi/4 до 3pi/4
+
+    lines = []
+    # 1. Радиальные линии
+    for t in thetas:
+        r_line = np.linspace(0, 2.0, 100)
+        lines.append(r_line * np.exp(1j * t))
+    # 2. Дуговые линии
+    for r in rs:
+        t_arc = np.linspace(np.pi / 4, 3 * np.pi / 4, 100)
+        lines.append(r * np.exp(1j * t_arc))
+
+    Z_lines = []
+    for line in lines:
+        Z_lines.extend(line)
+        Z_lines.append(np.nan + 1j * np.nan)
+    return np.array(Z_lines)
+
+
+# Функции отобржения
+
+def f1(z):
+    # D -> H: z1 = -i * z^2
+    return -1j * (z ** 2)
+
+
+def f2(z1):
+    # H -> K: z2 = (z1 - i) / (z1 + i)
+    return (z1 - 1j) / (z1 + 1j)
+
+
+def f3(z2):
+    # K -> G: w = pi * z2
+    return np.pi * z2
+
+
+# Исходные точки и все промежуточные/конечные результаты
+Z = get_grid_points()
+Z1 = f1(Z)  # H
+Z2 = f2(Z1)  # K
+W = f3(Z2)  # G
+
+def get_cloud_points(num_pts=10000):
+    """Генерирует облако точек в исходном секторе D."""
+    r_rand = np.sqrt(np.random.uniform(0, 4, num_pts))
+    t_rand = np.random.uniform(np.pi / 4, 3 * np.pi / 4, num_pts)
+    return r_rand * np.exp(1j * t_rand)
+
+
+def save_full_static_image():
+    Z_cloud = get_cloud_points()
+    Z1_cloud = f1(Z_cloud)
+    Z2_cloud = f2(Z1_cloud)
+    W_cloud = f3(Z2_cloud)
+
+    clouds = [Z_cloud, Z1_cloud, Z2_cloud, W_cloud]
+    titles = [
+        "(a) Область $D$\n($z$-плоскость)",
+        "(b) Область $H$\n($z_1 = -i z^2$)",
+        "(c) Область $K$\n($z_2 = (z_1-i)/(z_1+i)$)",
+        "(d) Область $G$\n($w = \\pi z_2$)"
+    ]
+    x_limits = [(-2.5, 2.5), (-4.5, 4.5), (-1.5, 1.5), (-4, 4)]
+    y_limits = [(-0.5, 2.5), (-0.5, 4.5), (-1.5, 1.5), (-4, 4)]
+    colors = np.angle(Z_cloud)
+
+    fig, ax = plt.subplots(1, 4, figsize=(18, 5))
+
+    for i in range(4):
+        ax[i].scatter(clouds[i].real, clouds[i].imag, c=colors, cmap='hsv', s=1, alpha=0.5)
+        ax[i].set_title(titles[i])
+        ax[i].set_xlim(x_limits[i])
+        ax[i].set_ylim(y_limits[i])
+        ax[i].set_aspect('equal')
+        ax[i].axhline(0, color='k', lw=0.8)
+        ax[i].axvline(0, color='k', lw=0.8)
+
+        # Добавляем границы для кругов
+        if i == 2:  # K
+            ax[i].add_patch(plt.Circle((0, 0), 1.0, color='red', fill=False, linestyle='--'))
+        if i == 3:  # G
+            ax[i].add_patch(plt.Circle((0, 0), np.pi, color='red', fill=False, linestyle='--'))
+
+    plt.tight_layout()
+    plt.savefig(os.path.join("output/img", "full_mapping.png"), dpi=200)
+    print("Статическое изображение 'output/img/full_mapping.png' сохранено.")
+    plt.close()
+
+
+save_full_static_image()
+\end{lstlisting}
+
+\newpage
+\section*{Доступность исходного кода}
+
+Полный исходный код, использованный для генерации статических изображений и GIF-анимаций (файлы \texttt{conformal\_mapping1.py}, \texttt{conformal\_mapping2.py}, \texttt{conformal\_mapping3.py} и \texttt{full\_mapping.py}), доступен в публичном репозитории на GitHub.
+
+\begin{center}
+    \textbf{Ссылка на репозиторий GitHub:} \\
+    \href{https://github.com/Axe-On-You/tfkp-lab2}{\texttt{https://github.com/Axe-On-You/tfkp-lab2}}
+\end{center}
+
+\vspace{1em}
+\noindent
+Структура проекта:
+\begin{itemize}
+    \item \texttt{conformal\_mapping[1, 2, 3].py}: Код для визуализации отдельных шагов $D \to H$, $H \to K$, $K \to G$.
+    \item \texttt{full\_mapping.py}: Код для генерации итоговой схемы и GIF-анимации $D \to H \to K \to G$.
+    \item \texttt{output/img/}: Сохраненные статические изображения.
+    \item \texttt{output/gif/}: Сохраненные GIF-анимации.
+\end{itemize}
+
+\end{document}
